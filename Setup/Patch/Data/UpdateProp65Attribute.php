@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @author    Trellis Team
  * @copyright Copyright © 2021 Trellis (https://www.trellis.co)
  */
+
 namespace Trellis\Compliance\Setup\Patch\Data;
 
 use Trellis\Compliance\Api\Data\ProductInterface;
@@ -20,9 +22,14 @@ class UpdateProp65Attribute implements DataPatchInterface
 {
     const PROP65_LABEL = 'Proposition 65';
 
-    private EavSetupFactory $eavSetupFactory;
-    private ModuleDataSetupInterface $moduleDataSetup;
+    protected EavSetupFactory $eavSetupFactory;
 
+    protected ModuleDataSetupInterface $moduleDataSetup;
+
+    /**
+     * @param EavSetupFactory          $eavSetupFactory
+     * @param ModuleDataSetupInterface $moduleDataSetup
+     */
     public function __construct(
         EavSetupFactory $eavSetupFactory,
         ModuleDataSetupInterface $moduleDataSetup
@@ -45,12 +52,19 @@ class UpdateProp65Attribute implements DataPatchInterface
         );
     }
 
+    /**
+     * @return string[]
+     */
     public static function getDependencies(): array
     {
         return [
             AddProp65Attribute::class
         ];
     }
+
+    /**
+     * @return array
+     */
     public function getAliases(): array
     {
         return [];

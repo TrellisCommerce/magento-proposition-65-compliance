@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @author    Trellis Team
@@ -14,10 +15,17 @@ use Magento\Framework\Exception\LocalizedException;
 
 class CmsBlockManager
 {
-    private BlockFactory $blockFactory;
-    private BlockRepositoryInterface $blockRepository;
-    private SearchCriteriaBuilder $searchCriteriaBuilder;
+    protected BlockFactory $blockFactory;
 
+    protected BlockRepositoryInterface $blockRepository;
+
+    protected SearchCriteriaBuilder $searchCriteriaBuilder;
+
+    /**
+     * @param BlockFactory             $blockFactory
+     * @param BlockRepositoryInterface $blockRepository
+     * @param SearchCriteriaBuilder    $searchCriteriaBuilder
+     */
     public function __construct(
         BlockFactory $blockFactory,
         BlockRepositoryInterface $blockRepository,
@@ -42,9 +50,7 @@ class CmsBlockManager
      */
     public function deleteBlock($identifier)
     {
-        $criteria = $this->searchCriteriaBuilder
-            ->addFilter('identifier', $identifier)
-            ->create();
+        $criteria = $this->searchCriteriaBuilder->addFilter('identifier', $identifier)->create();
         $list = $this->blockRepository->getList($criteria);
         foreach ($list->getItems() as $block) {
             $this->blockRepository->delete($block);

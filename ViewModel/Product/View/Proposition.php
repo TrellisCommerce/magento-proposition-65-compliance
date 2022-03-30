@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @author    Trellis Team
  * @copyright Copyright © 2021 Trellis (https://www.trellis.co)
  */
+
 namespace Trellis\Compliance\ViewModel\Product\View;
 
 use Trellis\Compliance\Api\Data\ProductInterface;
@@ -19,11 +21,19 @@ use Magento\Framework\View\LayoutInterface;
 
 class Proposition extends DataObject implements ArgumentInterface
 {
-    private Registry $coreRegistry;
-    protected LayoutInterface $layout;
-    protected ProductFactory $productFactory;
-    private Template $block;
+    protected Registry $coreRegistry;
 
+    protected LayoutInterface $layout;
+
+    protected ProductFactory $productFactory;
+
+    protected Template $block;
+
+    /**
+     * @param Registry        $coreRegistry
+     * @param LayoutInterface $layout
+     * @param ProductFactory  $productFactory
+     */
     public function __construct(
         Registry $coreRegistry,
         LayoutInterface $layout,
@@ -44,36 +54,38 @@ class Proposition extends DataObject implements ArgumentInterface
         if (!$this->hasData('product')) {
             $this->setData('product', $this->coreRegistry->registry('product') ?? $this->productFactory->create());
         }
+
         return $this->getData('product');
     }
 
     /**
      * @return string
      */
-    private function getPropositionValue(): string
+    protected function getPropositionValue(): string
     {
         $attribute = $this->getProduct()->getCustomAttribute(ProductInterface::PROP65_ATTRIBUTE);
-        $attributeValue = $attribute && $attribute->getValue()
-            ?  (string)$attribute->getValue()
-            : "";
+        $attributeValue = $attribute && $attribute->getValue() ? (string)$attribute->getValue() : "";
         $options = $this->getOptionValues();
+
         return $options[$attributeValue] ?? "";
     }
 
     /**
      * @param null $identifier
+     *
      * @return string
      */
     public function getPropositionHtml($identifier = null): string
     {
         try {
-            $html = $this->layout
-                ->createBlock(BlockByIdentifier::class)
-                ->setData('identifier', $identifier ?? $this->getPropositionValue())
-                ->toHtml();
+            $html = $this->layout->createBlock(BlockByIdentifier::class)->setData(
+                    'identifier',
+                    $identifier ?? $this->getPropositionValue()
+                )->toHtml();
         } catch (Exception $e) {
             $html = "";
         }
+
         return $html;
     }
 

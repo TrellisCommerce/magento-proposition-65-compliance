@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @author    Trellis Team
@@ -19,10 +20,17 @@ class AddCmsBlock implements DataPatchInterface, PatchRevertableInterface
 {
     const STORE_ID = 0;
 
-    private ModuleDataSetupInterface $moduleDataSetup;
-    private CmsBlockManager $cmsBlockManager;
-    private ImageManager $imageManager;
+    protected ModuleDataSetupInterface $moduleDataSetup;
 
+    protected CmsBlockManager $cmsBlockManager;
+
+    protected ImageManager $imageManager;
+
+    /**
+     * @param ModuleDataSetupInterface $moduleDataSetup
+     * @param CmsBlockManager          $cmsBlockManager
+     * @param ImageManager             $imageManager
+     */
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
         CmsBlockManager $cmsBlockManager,
@@ -47,7 +55,8 @@ class AddCmsBlock implements DataPatchInterface, PatchRevertableInterface
                 'is_active' => 1,
                 'content' => $this->getContent(ProductInterface::CMS_BLOCK_IDENTIFIER_WARNING_1),
             ],
-            ['title' => 'Warning #2',
+            [
+                'title' => 'Warning #2',
                 'identifier' => ProductInterface::CMS_BLOCK_IDENTIFIER_WARNING_2,
                 'stores' => [self::STORE_ID],
                 'is_active' => 1,
@@ -60,14 +69,20 @@ class AddCmsBlock implements DataPatchInterface, PatchRevertableInterface
         $this->moduleDataSetup->endSetup();
     }
 
-    private function getContent($blockIdentifier): string
+    /**
+     * @param $blockIdentifier
+     *
+     * @return string
+     */
+    protected function getContent($blockIdentifier): string
     {
-        return $this->getCssStyle() .
-            $this->imageManager->getImageTag() .
-            $this->getText()[$blockIdentifier];
+        return $this->getCssStyle() . $this->imageManager->getImageTag() . $this->getText()[$blockIdentifier];
     }
 
-    private function getText(): array
+    /**
+     * @return string[]
+     */
+    protected function getText(): array
     {
         return [
             ProductInterface::CMS_BLOCK_IDENTIFIER_WARNING_1 => '<b>WARNING:</b> Products shown here contain substances known to the State of California to cause cancer or reproductive harm. For more information go to: <a href="https://www.p65warnings.ca.gov">https://www.p65warnings.ca.gov</a>',
@@ -75,16 +90,25 @@ class AddCmsBlock implements DataPatchInterface, PatchRevertableInterface
         ];
     }
 
-    private function getCssStyle()
+    /**
+     * @return string
+     */
+    protected function getCssStyle()
     {
         return "<style>.warning-message{max-width:6%;height:auto;float:left;margin:5px 10px;}</style>";
     }
 
+    /**
+     * @return array
+     */
     public static function getDependencies()
     {
         return [];
     }
 
+    /**
+     * @return array
+     */
     public function getAliases()
     {
         return [];
@@ -95,7 +119,12 @@ class AddCmsBlock implements DataPatchInterface, PatchRevertableInterface
      */
     public function revert()
     {
-        foreach ([ProductInterface::CMS_BLOCK_IDENTIFIER_WARNING_1, ProductInterface::CMS_BLOCK_IDENTIFIER_WARNING_2] as $identifier) {
+        foreach (
+            [
+                ProductInterface::CMS_BLOCK_IDENTIFIER_WARNING_1,
+                ProductInterface::CMS_BLOCK_IDENTIFIER_WARNING_2
+            ] as $identifier
+        ) {
             $this->cmsBlockManager->deleteBlock($identifier);
         }
     }
