@@ -1,0 +1,11 @@
+<?php
+/** @var \Trellis\Compliance\ViewModel\Product\View\Proposition $viewModel */
+/** @var \Magento\Framework\View\Element\Template $block */
+
+$viewModel = $block->getViewModel();
+$viewModel->setBlock($block);
+?>
+
+<div class="prop65-warning">
+    <?= $viewModel->getPropositionHtml()?>
+</div>

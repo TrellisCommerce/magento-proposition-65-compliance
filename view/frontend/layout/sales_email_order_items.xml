@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Email Creditmemo Items List" design_abstraction="custom">
+    <body>
+        <referenceBlock name="additional.product.info">
+            <block class="Magento\Framework\View\Element\Template" name="sales.email.order.renderers.user_compliance" as="user_compliance" template="Trellis_Compliance::product/view/proposition.phtml" after="-" >
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Trellis\Compliance\ViewModel\Order\Item</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

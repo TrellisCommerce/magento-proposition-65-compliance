@@ -1,0 +1,28 @@
+<?php
+declare(strict_types=1);
+/**
+ * @author    Trellis Team
+ * @copyright Copyright © 2021 Trellis (https://www.trellis.co)
+ */
+
+namespace Trellis\Compliance\Model\Source\Product;
+
+use Trellis\Compliance\Api\Data\ProductInterface;
+use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
+
+class Prop65Source extends AbstractSource
+{
+    /**
+     * Return the cms block list (make sure the cms block exists)
+     *
+     * @return array[]
+     */
+    public function getAllOptions(): array
+    {
+        return [
+            ['value' => ProductInterface::VALUE_WARNING_NO_WARNING, 'label' => __('No Warning')],
+            ['value' => ProductInterface::VALUE_WARNING_1, 'label' => __('Warning #1')],
+            ['value' => ProductInterface::VALUE_WARNING_2, 'label' => __('Warning #2')],
+        ];
+    }
+}
