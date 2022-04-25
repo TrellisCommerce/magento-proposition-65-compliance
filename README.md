@@ -30,4 +30,6 @@ bin/magento cache:flush
 This module creates two CMS blocks available for usage throughout the site.
 
 * Warning #1 - generic warning message about Proposition 65.
-* Warning #2 - more specific warning message about Proposition 65.
+* Warning #2 - more detailed warning message about Proposition 65.
+
+The product attribute can be set when editing a product in admin, under the main attribute section. [Screenshot](https://share.getcloudapp.com/04uEnDvb)

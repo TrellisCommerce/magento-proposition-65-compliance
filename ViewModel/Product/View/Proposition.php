@@ -46,7 +46,8 @@ class Proposition extends DataObject implements ArgumentInterface
      */
     protected function getPropositionValue(): string
     {
-        $product = $this->catalogHelper->getProduct();
+        // PDP page - catalog helper has the product. For cart/checkout, use the getProduct method defined in Item.php
+        $product = $this->catalogHelper->getProduct() ?? $this->getProduct();
         if (!$product) {
             return '';
         }
