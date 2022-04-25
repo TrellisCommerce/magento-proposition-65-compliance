@@ -3,7 +3,7 @@
 declare(strict_types=1);
 /**
  * @author    Trellis Team
- * @copyright Copyright © 2021 Trellis (https://www.trellis.co)
+ * @copyright Copyright © 2022 Trellis (https://www.trellis.co)
  */
 
 namespace Trellis\Compliance\Model\Source\Product;
@@ -14,7 +14,7 @@ use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
 class Prop65Source extends AbstractSource
 {
     /**
-     * Return the cms block list (make sure the cms block exists)
+     * Return the compliance CMS block list
      *
      * @return array[]
      */

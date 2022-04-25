@@ -1,8 +1,3 @@
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
 define(['uiComponent'], function (Component) {
     'use strict';
 
@@ -22,8 +17,8 @@ define(['uiComponent'], function (Component) {
         getMessage: function (item) {
 
             let message = null;
-            window.checkoutConfig.quoteItemData.forEach(function(el) {
-                if (el.item_id == item.item_id) {
+            window.checkoutConfig.quoteItemData.forEach(function (el) {
+                if (el.item_id === item.item_id) {
                     message = el.user_compliance;
                 }
             });

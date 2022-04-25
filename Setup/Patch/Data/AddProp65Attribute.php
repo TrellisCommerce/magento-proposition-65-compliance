@@ -3,7 +3,7 @@
 declare(strict_types=1);
 /**
  * @author    Trellis Team
- * @copyright Copyright © 2021 Trellis (https://www.trellis.co)
+ * @copyright Copyright © 2022 Trellis (https://www.trellis.co)
  */
 
 namespace Trellis\Compliance\Setup\Patch\Data;
@@ -48,28 +48,29 @@ class AddProp65Attribute implements DataPatchInterface, PatchRevertableInterface
      */
     public function apply()
     {
-        $this->revert(); // removes the attribute if it already exists
-        $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
-        $eavSetup->addAttribute(Product::ENTITY, ProductInterface::PROP65_ATTRIBUTE, [
-            'type' => 'varchar',
-            'frontend' => '',
-            'label' => self::PROP65_LABEL,
-            'input' => 'select',
-            'source' => Prop65Source::class,
-            'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
-            'visible' => true,
-            'required' => false,
-            'user_defined' => false,
-            'default' => 0,
-            'searchable' => false,
-            'filterable' => false,
-            'comparable' => false,
-            'visible_on_front' => true,
-            'used_in_product_listing' => true,
-            'unique' => false,
-            'apply_to' => ''
-        ]);
-        $this->addToAttributeSet($eavSetup);
+                $this->revert(); // removes the attribute if it already exists
+                $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
+                $eavSetup->addAttribute(Product::ENTITY, ProductInterface::PROP65_ATTRIBUTE, [
+                    'type' => 'varchar',
+                    'frontend' => '',
+                    'label' => self::PROP65_LABEL,
+                    'input' => 'select',
+                    'source' => Prop65Source::class,
+                    'backend_model' => null,
+                    'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'visible' => true,
+                    'required' => false,
+                    'user_defined' => false,
+                    'default' => 0,
+                    'searchable' => false,
+                    'filterable' => false,
+                    'comparable' => false,
+                    'visible_on_front' => true,
+                    'used_in_product_listing' => true,
+                    'unique' => false,
+                    'apply_to' => ''
+                ]);
+                $this->addToAttributeSet($eavSetup);
     }
 
     /**

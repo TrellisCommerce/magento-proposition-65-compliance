@@ -1,14 +1,12 @@
 {
-  "name": "module/compliance",
-  "version": "1.0.0",
-  "description": "N/A",
-  "type": "magento2-module",
+  "name": "trellis/module-proposition-65-compliance",
+  "description": "Adds support to help meet some Proposition 65 requirements.",
   "require": {
+    "php": "~7.3.0||~7.4.0",
     "magento/framework": "*"
   },
-  "license": [
-    "Proprietary"
-  ],
+  "type": "magento2-module",
+  "version": "1.0.0",
   "autoload": {
     "files": [
       "registration.php"

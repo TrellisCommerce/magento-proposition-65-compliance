@@ -3,7 +3,7 @@
 declare(strict_types=1);
 /**
  * @author    Trellis Team
- * @copyright Copyright © 2021 Trellis (https://www.trellis.co)
+ * @copyright Copyright © 2022 Trellis (https://www.trellis.co)
  */
 
 namespace Trellis\Compliance\ViewModel\Product\View;
@@ -79,9 +79,9 @@ class Proposition extends DataObject implements ArgumentInterface
     {
         try {
             $html = $this->layout->createBlock(BlockByIdentifier::class)->setData(
-                    'identifier',
-                    $identifier ?? $this->getPropositionValue()
-                )->toHtml();
+                'identifier',
+                $identifier ?? $this->getPropositionValue()
+            )->toHtml();
         } catch (Exception $e) {
             $html = "";
         }

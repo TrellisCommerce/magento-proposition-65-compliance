@@ -1,9 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
-/**
- */
-
-use Magento\Framework\Component\ComponentRegistrar;
-
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Trellis_Compliance', __DIR__);
+Magento\Framework\Component\ComponentRegistrar::register(
+    Magento\Framework\Component\ComponentRegistrar::MODULE,
+    'Trellis_Compliance',
+    __DIR__
+);

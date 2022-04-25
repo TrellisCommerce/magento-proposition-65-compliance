@@ -3,7 +3,7 @@
 declare(strict_types=1);
 /**
  * @author    Trellis Team
- * @copyright Copyright © 2021 Trellis (https://www.trellis.co)
+ * @copyright Copyright © 2022 Trellis (https://www.trellis.co)
  */
 
 namespace Trellis\Compliance\Plugin\Checkout;
@@ -28,12 +28,12 @@ class ConfigProviderPlugin
      * @param array                 $result
      *
      * @return array
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function afterGetConfig(DefaultConfigProvider $subject, array $result)
+    public function afterGetConfig(DefaultConfigProvider $subject, array $result): array
     {
         if (is_array($result['quoteItemData'])) {
             foreach ($result['quoteItemData'] as &$itemData) {
+                //TODO: check for existance
                 $itemData['user_compliance'] = $this->getHtml($itemData['product']);
             }
         }

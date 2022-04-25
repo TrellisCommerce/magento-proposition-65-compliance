@@ -3,7 +3,7 @@
 declare(strict_types=1);
 /**
  * @author    Trellis Team
- * @copyright Copyright © 2021 Trellis (https://www.trellis.co)
+ * @copyright Copyright © 2022 Trellis (https://www.trellis.co)
  */
 
 namespace Trellis\Compliance\Api\Data;
