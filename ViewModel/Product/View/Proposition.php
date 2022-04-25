@@ -8,54 +8,37 @@ declare(strict_types=1);
 
 namespace Trellis\Compliance\ViewModel\Product\View;
 
+use Magento\Catalog\Helper\Data;
 use Trellis\Compliance\Api\Data\ProductInterface;
-use Exception;
-use Magento\Catalog\Model\Product;
-use Magento\Catalog\Model\ProductFactory;
 use Magento\Cms\Block\BlockByIdentifier;
 use Magento\Framework\DataObject;
-use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
 
 class Proposition extends DataObject implements ArgumentInterface
 {
-    protected Registry $coreRegistry;
+    /** @var Template  */
+    protected Template $block;
+
+    protected Data $catalogHelper;
 
     protected LayoutInterface $layout;
 
-    protected ProductFactory $productFactory;
-
-    protected Template $block;
-
     /**
-     * @param Registry        $coreRegistry
+     * @param Data            $catalogHelper
      * @param LayoutInterface $layout
-     * @param ProductFactory  $productFactory
+     * @param array           $data
      */
     public function __construct(
-        Registry $coreRegistry,
+        Data $catalogHelper,
         LayoutInterface $layout,
-        ProductFactory $productFactory
-    ) {
-        $this->coreRegistry = $coreRegistry;
-        $this->layout = $layout;
-        $this->productFactory = $productFactory;
-    }
-
-    /**
-     * Retrieve currently viewed product object
-     *
-     * @return Product
-     */
-    public function getProduct(): Product
+        array $data = []
+    )
     {
-        if (!$this->hasData('product')) {
-            $this->setData('product', $this->coreRegistry->registry('product') ?? $this->productFactory->create());
-        }
-
-        return $this->getData('product');
+        parent::__construct($data);
+        $this->catalogHelper = $catalogHelper;
+        $this->layout = $layout;
     }
 
     /**
@@ -63,7 +46,11 @@ class Proposition extends DataObject implements ArgumentInterface
      */
     protected function getPropositionValue(): string
     {
-        $attribute = $this->getProduct()->getCustomAttribute(ProductInterface::PROP65_ATTRIBUTE);
+        $product = $this->catalogHelper->getProduct();
+        if (!$product) {
+            return '';
+        }
+        $attribute = $product->getCustomAttribute(ProductInterface::PROP65_ATTRIBUTE);
         $attributeValue = $attribute && $attribute->getValue() ? (string)$attribute->getValue() : "";
         $options = $this->getOptionValues();
 
@@ -82,7 +69,7 @@ class Proposition extends DataObject implements ArgumentInterface
                 'identifier',
                 $identifier ?? $this->getPropositionValue()
             )->toHtml();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $html = "";
         }
 
