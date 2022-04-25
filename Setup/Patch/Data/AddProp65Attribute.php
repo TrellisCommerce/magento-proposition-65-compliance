@@ -68,7 +68,8 @@ class AddProp65Attribute implements DataPatchInterface, PatchRevertableInterface
                     'visible_on_front' => true,
                     'used_in_product_listing' => true,
                     'unique' => false,
-                    'apply_to' => ''
+                    'apply_to' => '',
+                    'note' => 'Select which warning message should be displayed on the product detail page.'
                 ]);
                 $this->addToAttributeSet($eavSetup);
     }

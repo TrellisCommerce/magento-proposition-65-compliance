@@ -21,9 +21,9 @@ class Prop65Source extends AbstractSource
     public function getAllOptions(): array
     {
         return [
-            ['value' => ProductInterface::VALUE_WARNING_NO_WARNING, 'label' => __('No Warning')],
-            ['value' => ProductInterface::VALUE_WARNING_1, 'label' => __('Warning #1')],
-            ['value' => ProductInterface::VALUE_WARNING_2, 'label' => __('Warning #2')],
+            ['value' => ProductInterface::VALUE_WARNING_NO_WARNING, 'label' => __('No Warning Message')],
+            ['value' => ProductInterface::VALUE_WARNING_1, 'label' => __('Generic Warning Message')],
+            ['value' => ProductInterface::VALUE_WARNING_2, 'label' => __('Detailed Warning Message')],
         ];
     }
 }

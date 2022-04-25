@@ -33,7 +33,6 @@ class ConfigProviderPlugin
     {
         if (is_array($result['quoteItemData'])) {
             foreach ($result['quoteItemData'] as &$itemData) {
-                //TODO: check for existance
                 $itemData['user_compliance'] = $this->getHtml($itemData['product']);
             }
         }
