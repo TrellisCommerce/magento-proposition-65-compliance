@@ -19,7 +19,6 @@ one of the newly created CMS blocks and display the warning message in several p
 Follow the instructions below to install this extension using Composer.
 
 ```
-composer config repositories.trellis/module-proposition-65-compliance git git@github.com:TrellisCommerce/magento-proposition-65-compliance
 composer require trellis/module-proposition-65-compliance
 bin/magento module:enable --clear-static-content Trellis_Compliance
 bin/magento setup:upgrade
